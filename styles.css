@@ -1,0 +1,9 @@
+</*CSS Reset Settings */
+*{
+	margin: 0px;
+	padding: 0px;
+}
+#p{
+border: 2px solid black;
+}
+
