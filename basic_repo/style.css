@@ -1,4 +1,9 @@
 h1 {
 backgroundcolor: black;
 }
-
+h2 {
+border: 2px solid black;
+}
+p{
+backgroundcolor: blue;
+}
