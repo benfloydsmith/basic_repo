@@ -1,0 +1,64 @@
+
+# How to itterate through a collection
+<% @products.each do |product| %>
+  <p><%= product.name %></p>
+  <p><%= product.description %></p>
+<% end %>
+
+<br>
+
+#How to show model validations in the view
+<% if @product.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@product.errors.count, "error")%>prohibited this post from being saved:</h2>
+    <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
+#How to create
+def create
+  @product = Product.create( name: params[:name], description: params[:description])
+  #this redirect only applies for when the product was successfully created! You'll have to modify this  code with an if statement to RENDER the new view IF there are errors ELSE REDIRECT to the products view if there weren't errors.
+  redirect_to '/products'
+end
+
+______________________________________________________________________
+# How to user Params with controller name:
+# HTML file:
+<form action='/products/' method='post'>
+  <input type='text' name='product[name]' placeholder='name' />
+  <input type='text' name='product[description]' placeholder='description' />
+  <input type='submit' value='Create' />
+</form>
+
+# Controller Method:  This method will show even the private methods... to avoid, look at next solution
+def create
+  @product = Product.create( params[:product] )
+  #this redirect only applies for when the product was successfully created! You'll have to modify this  code with an if statement to RENDER the new view IF there are errors ELSE REDIRECT to the products view if there weren't errors.
+  redirect_to '/products'
+end
+
+# Controller Method:
+def create
+  @product = Product.create( product_params )
+  redirect_to '/products'
+end
+def update
+  @product = Product.update( product_params )
+  redirect_to '/products'
+end
+private 
+  def product_params
+   params.require(:product).permit(:name, :description)
+  end
+-------------------------------------------------------------------------
+
+
+
+
+

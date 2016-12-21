@@ -1,0 +1,49 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	#register{
+		display: inline-block;
+		margin: 4px;
+	}
+	#login{
+		display: inline-block;
+		margin: 4px;
+		vertical-align: top;
+	}
+</style>
+	<title>Login and Registration</title>
+</head>
+<body>
+
+<h1>Welcome!</h1>
+<div id='register'>
+<fieldset>
+	<legend><h2>Register</h2></legend>
+		<form action='/users/create' method='post'>
+			<input type="hidden" name="authenticity_token" value='<%= form_authenticity_token %>'>
+			<p>First Name: <input type="text" name="user[name]"></p>
+			<p>Last Name: <input type="text" name="user[alias]"></p>
+			<p>Email: <input type="email" name="user[email]"></p>
+			<p>Password: <input type="password" name="user[password]" placeholder="Min of 8 Characters"></p>
+			<p>Confirm Password<input type="password" name="user[password_confirmation]"></p>
+			<p>Age: <input type="date" name="user[DOB]">
+			<p><input type="submit" value="Register"></p>
+		</form>
+</fieldset>
+</div>
+<div id='login'>
+	<fieldset>
+		<legend><h2>Login</h2></legend>
+		<form action='/sessions/create' method='post'>
+			<input type="hidden" name="authenticity_token" value='<%= form_authenticity_token %>'>
+			<p>Email: <input type="email" name="user[email]"></p>
+			<p>Password: <input type="password" name="user[password]"></p>
+			<input type="submit" value='Login'>
+		</form>
+	</fieldset>
+</div>
+
+</body>
+</html>

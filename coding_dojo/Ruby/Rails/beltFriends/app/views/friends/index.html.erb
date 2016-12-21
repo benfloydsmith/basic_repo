@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Friends</title>
+</head>
+<body>
+
+<h1>Hello <%= current_user.alias %></h1>
+<p>Here is the list of your friends:</p>
+
+<table>
+	<tr>
+		<th>Alias</th>
+		<th>Action</th>
+	</tr>
+	<tr>
+	<% @my_friends.each do |friend| %>
+		<td><a href="/users/<%= friend.id %>"><%= friend.alias %></a></td>
+		<td><%= link_to "Remove as Friend", "/friends/#{friend.id}", { controller: 'friends', action: 'destroy', id: friend.id, method: 'delete' } %></td>
+	</tr>
+</table>
+
+<p>Other Users not on your friend's list:</p>
+
+<table>
+	<tr>
+		<th>Alias</th>
+		<th>Action</th>
+	</tr>
+	<tr>
+	<% @other_friends.each do |friend| %>
+		<td><a href="/users/<%= friend.id %>"><%= friend.alias %></a></td>
+		<td><%= link_to "Add Friend", "/friends/create", { controller: 'friends', action: 'post', id: friend.id, method: 'create' } %></td>
+	</tr>
+</table>
+
+</body>
+</html>

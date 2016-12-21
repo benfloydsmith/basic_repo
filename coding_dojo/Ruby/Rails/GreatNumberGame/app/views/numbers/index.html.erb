@@ -1,0 +1,33 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Great Number Game</title>
+</head>
+<body>
+
+<h2>Welcome to the Great Number Game</h2>
+<p>I am thinking of a number between 1 and 100</p>
+<p>Take a guess</p>
+
+<% if flash[:success] %>
+	<%= flash[:success] %>
+
+<form action='/restart'>
+	<input type="hidden" name="authenticity_token" value='form_authenticity_token'>
+	<input type="submit" value="Restart Game">
+</form>
+<% else %>
+<form action='/guess'>
+	<input type="hidden" name="authenticity_token" value='form_authenticity_token'>
+	<input type="text" name="guess" value="">
+	<input type="submit" value="Submit">
+</form>
+<% end %>
+<% if flash[:incorrect] %>
+	<%= flash[:incorrect] %>
+<% end %>
+
+</body>
+</html>

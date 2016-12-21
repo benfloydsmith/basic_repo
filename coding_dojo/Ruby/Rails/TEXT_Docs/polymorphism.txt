@@ -1,0 +1,5 @@
+1) rails g model Comment user:references comment:text commentable_id:integer commentable_type:string
+2) rake db:migrate
+3) belongs_to :user
+   belongs_to :commentable, polymorphic: true
+4) has_many :comments, as: :commentable (goes into each model rb file)

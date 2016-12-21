@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Movies</title>
+</head>
+<body>
+ | <a href="/users/<%= current_user.id %>/edit">Edit Profile</a> | <a href="/theaters">Back</a>
+<h1>Hi <%= current_user.first %>, </h1>
+<h2>Rate this Theater:</h2>
+	<form action='/stars/create' method='post'>
+		<input type="hidden" name="authenticity_token" value='<%= form_authenticity_token %>'>
+		<select>
+			<option value='1'>1</option>
+			<option value='2'>2</option>
+			<option value='3'>3</option>
+			<option value='4'>4</option>
+			<option value='5'>5</option>
+		</select>
+		<input type="submit" value="Rate Theater">
+	</form>
+<h3>Here is a list of Movies showing at <%= @theater.name %> Cinema:</h3>
+<hr>
+<% @movie.each do |m| %>
+	<p><a href="/movies/<%= m.id %>"><%= m.title %></a> | <%= m.director %> | <%= m.rating %> | <%= m.length %></p>
+	<p><%= m.description %></p>
+	<p>Rating</p>
+<hr>
+<% end %>
+</body>
+</html>

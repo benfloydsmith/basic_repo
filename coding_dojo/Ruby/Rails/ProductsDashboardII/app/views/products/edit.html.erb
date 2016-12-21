@@ -1,0 +1,20 @@
+
+<h2>Edit Product</h2>
+
+<form action='/products/<%= @edit.id %>/update' method='post'>
+	<input type="hidden" name="authenticity_token" value='<%=form_authenticity_token%>'>
+	<input type="hidden" name="_method" value='patch'>
+	<p>Category<select name='category'>
+		<option value='1'>Electronic</option>
+		<option value='2'>Household</option>
+		<option value='3'>Gardening</option>
+		<option value='4'>Automotive</option>
+		<option value='5'>Ninjas</option>
+	</select></p>
+	<p>Name: <input type="text" name="name" placeholder="<%= @edit.name %>"></p>
+	<p>Description: <input type="text" name="description" placeholder="<%= @edit.description %>"></p>
+	<p>Price: <input type="text" name="price" placeholder="<%= @edit.price %>"></p>
+	<input type="submit" value="Update">
+</form>
+
+<a href="/products/<%= @edit.id %>">Show</a> | <a href="/products">Back</a>

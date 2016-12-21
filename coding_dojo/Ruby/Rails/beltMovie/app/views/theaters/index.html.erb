@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+	table, th, td{
+		border: 1px solid black;
+		padding: 5px;
+	}
+</style>
+	<title>Theaters</title>
+</head>
+<body>
+
+<h2>Welcome <%= current_user.first %>,</h2>
+
+<table>
+	<tr>
+		<th>Theater Name</th>
+		<th>Location</th>
+		<th>Phone</th>
+		<th>Avg Rating</th>
+	</tr>
+	<tr>
+	<% @theaters.each do |theater| %>
+		<td><a href="/theaters/<%= theater.id %>"><%= theater.name %></a></td>
+		<td><%= theater.city %>, <%= theater.state %></td>
+		<td><%= theater.phone %></td>
+		<td><% if theater.stars.present? %>
+				<%= star_avg theater.stars %></td>
+			<% else %>
+				n/a
+			<% end %>
+	</tr>
+	<% end %>
+</table>
+
+</body>
+</html>

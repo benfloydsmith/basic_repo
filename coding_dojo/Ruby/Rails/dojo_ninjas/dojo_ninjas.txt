@@ -1,0 +1,62 @@
+QUESTIONS
+1). Start a new project (the name of the project should be 'dojo_ninjas')
+2). Create appropriate tables/models using "rails generate model", "rake db:create" and "rake db:migrate".
+3). Using Ruby console:
+	A). Create 3 dojos (insert some blank entries just to make sure it's allowing you to insert empty entries)
+4). Change your models so that it does the following validations:
+	A). For the dojo, require the presence of the name, city, and state; also require the state to be two characters long
+	B). For the ninja, require the presence of the first name and last name
+5). Make sure that your ninja model belongs to the dojo (specify this in the model for both the dojo and the ninja)
+6). Using ruby console
+	A). Delete the three dojos you created (e.g. Dojo.find(1).destroy; also look up destroy_all method)
+	B). Create 3 additional dojos by using Dojo.new().
+	C). Try to create a few more dojos but without specifying some of the required fields. Make sure that the validation works and generates the errors.
+	D). Create 3 ninjas that belong to the first dojo you created.
+	E). Create 3 more ninjas and have them belong to the second dojo you created.
+	F). Create 3 more ninjas and have them belong to the third dojo you created.
+	G). Make sure you understand how to get all of the ninjas for any dojo (e.g. get all the ninjas for the first dojo, second dojo, etc).
+	H). How would you only retrieve the first_names of the ninjas that belong to the second dojo and order the result by created_at DESC order?
+	I). Delete the second dojo. How could you adjust your model so that it automatically removes all of the ninjas associated with that dojo?
+
+
+ANSWERS
+
+1) rails new dojo_ninjas
+2) rails g model Dojo name:string city:string state:string
+   rake db:create
+   rails g model Ninja first_name:string last_name:string dojo:references
+   rake db:migrate
+3) Dojo.create
+   Dojo.create(name:"Dallas Dojo", city:"Dallas", state:"TX")
+   Dojo.create(name:"Seattle Dojo", city:"Seattle", state:"WA"
+4) validates :name, :city, presence: true
+   validates :state, presence: true, length: { is: 2 }
+   validates :first_name, :last_name, presence: true
+5) in dojo.rb add "has_many: ninjas"
+   in ninja.rb make sure "belongs_to :dojo"
+6) A.Dojo.find(1).destroy
+     Dojo.find(2).destroy
+     Dojo.find(3).destroy
+   B.dojo1 = Dojo.new(name:"X", city:"Y", state:"Z")
+     dojo1.save
+   C.dojo2 = Dojo.new(city:"Y")
+     dojo2.save
+     error
+     dojo3 = Dojo.new(state:"Z")
+     dojo3.save
+     error
+   D.Dojo.first.ninjas.create(first_name:"Brad, last_name:"Proctor")
+     Dojo.first.ninjas.create(first_name:"Ben, last_name:"Smith")
+     Dojo.first.ninjas.create(first_name:"John, last_name:"Lennon")
+   E.Dojo.find(5).ninjas.create(first_name:"Brad, last_name:"Proctor")
+     Dojo.find(5).ninjas.create(first_name:"Ben, last_name:"Smith")
+     Dojo.find(5).ninjas.create(first_name:"John, last_name:"Lennon")
+   F.Dojo.find(6).ninjas.create(first_name:"Brad, last_name:"Proctor")
+     Dojo.find(6).ninjas.create(first_name:"Ben, last_name:"Smith")
+     Dojo.find(6).ninjas.create(first_name:"John, last_name:"Lennon")
+   G.Dojo.first.ninjas
+     Dojo.find(5).ninjas
+     Dojo.find(6).ninjas
+   H.Dojo.find(5).ninjas.select("first_name").order(created_at: :desc)
+   I.Dojo.second.destroy_all
+     

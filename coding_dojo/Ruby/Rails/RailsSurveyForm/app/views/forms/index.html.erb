@@ -1,0 +1,28 @@
+<form action='/form' method='post'>
+	<div>
+		<label>Name</label>
+		<input type="text" name="form[name]">
+		<input type="hidden" name="authenticity_token" value='<%=form_authenticity_token%>'>
+	</div>
+	<div>
+		<label>Locations</label>
+		<select name=form[location]>
+			<% @locations.each do |loc| %>
+			<option><%= loc %></option>
+			<% end %>
+		</select>
+	</div>
+	<div>
+		<label>Fav Language</label>
+		<select name=form[language]>
+			<% @languages.each do |lang| %>
+			<option><%= lang %></option>
+			<% end %>
+		</select>
+	</div>
+	<div>
+		<label>Comment</label>
+		<textarea name=form[comment] rows='5' cols='20'></textarea>
+	</div>
+	<input type="submit" value="Submit">
+</form>

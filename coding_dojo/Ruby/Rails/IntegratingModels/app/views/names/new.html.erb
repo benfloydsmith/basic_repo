@@ -1,0 +1,11 @@
+<ul>
+	<% @people.name do |x| %>
+	<li><%= x.name %></li>
+	<% end %>
+</ul>
+
+<form action='/users/create' method='post'>
+	<input type="hidden" name="authenticity_token" value='form_authenticiity_token'>
+	<input type="text" name="name" palceholder='Name'>
+	<input type="submit" value="Create">
+</form>

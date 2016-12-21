@@ -1,0 +1,15 @@
+
+
+<h2>Edit User</h2>
+
+<form action='/users/update' method='post'>
+	<input type="hidden" name="authenticity_token" value='<%=form_authenticity_token%>'>
+	<input type="hidden" name="_method" value='patch'>
+	<p>First Name: <input type="text" name="first_name" placeholder="<%= @edit.first_name %>"></p>
+	<p>Last Name: <input type="text" name="last_name" placeholder="<%= @edit.last_name %>"></p>
+	<p>Email: <input type="email" name="email" placeholder="<%= @edit.email %>"></p>
+	<p>Password: <input type="password" name="password" placeholder="<%= @edit.password %>"></p>
+	<input type="submit" value="Update">
+</form>
+
+<a href="/users/<%= @edit.id %>">Show</a> | <a href="/users">Back</a>

@@ -1,0 +1,73 @@
+QUESTIONS
+
+1)  Create 5 users
+2)  Create 5 blogs
+3)  Have the first 3 blogs be owned by the first user
+4)  Have the 4th blog you create be owned by the second user
+5)  Have the 5th blog you create be owned by the last user
+6)  Have the third user own all of the blogs that were created.
+7)  Have the first user create 3 posts for the blog with an id of 2. Remember that you shouldn't do Post.create(user: User.first, blog_id: 2) but more like 8) Post.create(user: User.first, blog: Blog.find(2)). Again, you should never reference the foreign key in Rails.
+8)  Have the second user create 5 posts for the last Blog.
+9)  Have the 3rd user create several posts for different blogs.
+10) Have the 3rd user create 2 messages for the first post created and 3 messages for the second post created
+11) Have the 4th user create 3 messages for the last post you created.
+12) Change the owner of the 2nd post to the last user.
+13) Change the 2nd post's content to be something else.
+14) Retrieve all blogs owned by the 3rd user (make this work by simply doing: User.find(3).blogs).
+15) Retrieve all posts that were created by the 3rd user
+16) Retrieve all messages left by the 3rd user
+17) Retrieve all posts associated with the first blog as well as who left these posts.  
+18) Retrieve all messages associated with the first blog along with all the user information of those who left the messages.
+19) Grab all user information of those that own the first blog (make this work by allowing Blog.first.owners to work).
+20) Change it so that the first blog is no longer owned by the first user.
+
+
+ANSWERS
+1)  User.create(first_name:"Brad", last_name:"Proctor", email:"a@b.com")
+    User.create(first_name:"Ben", last_name:"Smith", email:"c@d.com")
+    User.create(first_name:"King", last_name:"Leonidas", email:"e@f.com")
+    User.create(first_name:"Cat", last_name:"Dog", email:"g@h.com")
+    User.create(first_name:"Bob", last_name:"Ross", email:"i@j.com")
+2)  Blog.create(name:"Discovery", description:"Science")
+    Blog.create(name:"MTV", description:"Music")
+    Blog.create(name:"TBS", description:"Comedy")
+    Blog.create(name:"HBO", description:"TV/Movies")
+    Blog.create(name:"ESPN", description:"Sports")
+3)  Owner.create(user: User.first, blog: Blog.first)
+    Owner.create(user: User.first, blog: Blog.find(2))
+    Owner.create(user: User.first, blog: Blog.find(3))
+4)  Owner.create(user: User.second, blog: Blog.find(4))
+5)  Owner.create(user: User.last, blog: Blog.find(5))
+6)  for i in 1..5
+       Owner.create(user: User.find(3), blog: Blog.find(i))
+    end
+7)  Post.create(user: User.first, blog: Blog.find(2), title: "Post 1", content:"post 1 content")
+    Post.create(user: User.first, blog: Blog.find(2), title: "Post 2", content:"post 2 content")
+    Post.create(user: User.first, blog: Blog.find(2), title: "Post 3", content:"post 3 content")
+8)  Post.create(user: User.second, blog: Blog.last, title: "Post 4", content:"post 4 content")
+    Post.create(user: User.second, blog: Blog.last, title: "Post 5", content:"post 5 content")
+    Post.create(user: User.second, blog: Blog.last, title: "Post 6", content:"post 6 content")
+    Post.create(user: User.second, blog: Blog.last, title: "Post 7", content:"post 7 content")
+    Post.create(user: User.second, blog: Blog.last, title: "Post 8", content:"post 8 content")
+9)  Post.create(user: User.find(3), blog: Blog.find(3), title: "Post 9", content:"post 9 content")
+    Post.create(user: User.find(3), blog: Blog.find(4), title: "Post 10", content:"post 10 content")
+    Post.create(user: User.find(3), blog: Blog.find(5), title: "Post 11", content:"post 11 content")
+10) Message.create(user: User.find(3), post: Post.first, author: "Author 1", message: "Message 1")
+    Message.create(user: User.find(3), post: Post.first, author: "Author 1", message: "Message 2")
+    Message.create(user: User.find(3), post: Post.second, author: "Author 1", message: "Message 3")
+    Message.create(user: User.find(3), post: Post.second, author: "Author 1", message: "Message 4")
+    Message.create(user: User.find(3), post: Post.second, author: "Author 1", message: "Message 5")
+11) Message.create(user: User.find(4), post: Post.last, author: "Author 2", message: "Message 1")
+    Message.create(user: User.find(4), post: Post.last, author: "Author 2", message: "Message 2")
+    Message.create(user: User.find(4), post: Post.last, author: "Author 2", message: "Message 3")
+12) Post.second.update(user: User.last)
+13) Post.second.update(content:"Some other content")
+14) User.find(3).blogs
+15) User.find(3).posts
+16) User.find(3).messages
+17) posts = Blog.last.posts.includes(:user)
+    posts[0].user
+18) messages = Blog.last.messages.includes(:user)
+    messages[0].user
+19) Blog.first.owners
+20) Owner.first.delete

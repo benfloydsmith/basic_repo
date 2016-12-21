@@ -1,0 +1,55 @@
+FormHelpers
+
+<!-- #This Code -->
+<% form_for :person, @person, :url => { :action => "create" } do |f| %>
+  <%= f.text_field :first_name %>
+  <%= f.text_field :last_name %>
+  <%= submit_tag 'Create' %>
+<% end %>
+
+<!-- Creates this HTML-->
+<form action="/persons/create" method="post">
+  <input id="person_first_name" name="person[first_name]" size="30" type="text" />
+  <input id="person_last_name" name="person[last_name]" size="30" type="text" />
+  <input name="commit" type="submit" value="Create" />
+</form>
+___________________________________________________________________________
+
+
+<!-- More Form Helpers -->
+<%= form_for(@post) do |f| %>
+	<% if @post.errors.any? %>
+		<h2><%= pluralize(@post.errors.count, "error") %></h2>
+	<ul>
+		<% @post.errors.full_messages.each do |msg| %=>
+			<li><%= msg %></li>
+        <% end %>
+      </ul>
+   </div>
+  <% end %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :content %><br />
+    <%= f.text_area :content %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<!-- Same Form as a Simple Form -->  <!-- Must add 'simple_form' in the GEM file -->
+<%= simple_form_for @post do |f| %>
+<%= f.input :name %>
+<%= f.input :title %>
+<%= f.input :content %>
+<%= f.button :submit %>
+<% end %>
+
+

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Buy Tickets</title>
+</head>
+<body>
+ | <a href="/theaters">Back to List of Theaters</a>
+<h1><%= @movie.title %></h1>
+<h2>Buy Tickets</h2>
+<hr>
+<p><b>Director:</b> <%= @movie.director %></p>
+<p><b>Rating:</b> <%= @movie.rating %></p>
+<p><b>Length:</b> <%= @movie.length %></p>
+<p><b>Description:</b> <%= @movie.description %></p>
+<% if @movie.users_attending.exclude? current_user %>
+		<form action='/attends/create' method='post'>
+		<input type="hidden" name="authenticity_token" value='<%= form_authenticity_token %>'>
+		<input type="hidden" name="movie_id" value='<%= @movie.id %>'>
+		<input type="submit" value="Buy Ticket">
+	</form>
+<% end %>
+
+</body>
+</html>

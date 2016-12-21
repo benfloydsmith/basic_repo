@@ -1,0 +1,39 @@
+QUESTIONS
+1). create 5 new blogs.
+2). create several posts for each blog.
+3). create several messages for the first post.
+4). know how to retrieve all posts for the first blog.
+5). know how to retrieve all posts for the last blog (sorted by title in the DESC order).
+6). know how to update the first post's title.
+7). know how to delete the third post (have the model automatically delete all 8). messages associated with the third post when you delete the third post).
+8). know how to retrieve all blogs.
+9). know how to retrieve all blogs whose id is less than 5.
+10). think of other potential information you may need for this application and get comfortable being able to pull information using the console.
+
+
+
+ANSWERS
+1) Blog.create(name:"Discovery", description:"Science")
+   Blog.create(name:"MTV", description:"Music")
+   Blog.create(name:"TBS", description:"Comedy")
+   Blog.create(name:"HBO", description:"TV/Movies")
+   Blog.create(name:"ESPN", description:"Sports")
+2) Blog.first.posts.create(title:"Science 1", content:"science content")
+   Blog.first.posts.create(title:"Science 2", content:"science content")
+   Blog.find(2).posts.create(title:"Music 1", content:"music content")
+   Blog.find(2).posts.create(title:"Music 2", content:"music content")
+   Blog.find(3).posts.create(title:"Comedy 1", content:"comedy content")
+   Blog.find(3).posts.create(title:"Comedy 2", content:"comedy content")
+   Blog.find(4).posts.create(title:"TV/Movies 1", content:"tv content")
+   Blog.find(4).posts.create(title:"TV/Movies 2", content:"movie content")
+   Blog.find(5).posts.create(title:"Sports 1", content:"sports content")
+   Blog.find(5).posts.create(title:"Sports 2", content:"sports content")
+3) Post.first.messages.create(author:"Brad", message:"Science is Awesome!")
+   Post.first.messages.create(author:"Ben", message:"Science is for Suckas!")
+   Post.first.messages.create(author:"Bill Nye", message:"Go to Hell, Ben")
+4) Blog.first.posts
+5) Blog.last.posts.order(title: :desc)
+6) Post.first.update(title: "Science 3")
+7) Post.find(3).delete
+8) Blog.all
+9) Blog.where("id < 5")

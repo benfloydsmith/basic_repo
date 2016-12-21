@@ -1,0 +1,18 @@
+
+
+<table>
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Password</th>
+	</tr>
+	<tr>
+	<% @users.each do |u| %>
+		<td><%= u.first_name %> <%= u.last_name %> | </td> 
+		<td><%= u.email %> | </td>
+		<td><%= u.password %></td>
+	</tr>
+	<% end %>
+</table>
+
+<a href="/users/new">New User</a>
